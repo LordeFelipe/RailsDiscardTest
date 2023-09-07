@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_07_180654) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_182637) do
   create_table "counties", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_counties_on_discarded_at"
   end
 
   create_table "exams", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_exams_on_discarded_at"
   end
 
   create_table "scheduled_exams", force: :cascade do |t|
@@ -29,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_180654) do
     t.integer "virtual_classroom_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_scheduled_exams_on_discarded_at"
     t.index ["exam_id"], name: "index_scheduled_exams_on_exam_id"
     t.index ["virtual_classroom_id"], name: "index_scheduled_exams_on_virtual_classroom_id"
   end
@@ -38,6 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_180654) do
     t.integer "school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_school_classes_on_discarded_at"
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
@@ -46,7 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_180654) do
     t.integer "county_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
     t.index ["county_id"], name: "index_schools_on_county_id"
+    t.index ["discarded_at"], name: "index_schools_on_discarded_at"
   end
 
   create_table "virtual_classrooms", force: :cascade do |t|
@@ -54,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_180654) do
     t.integer "school_class_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_virtual_classrooms_on_discarded_at"
     t.index ["school_class_id"], name: "index_virtual_classrooms_on_school_class_id"
   end
 
